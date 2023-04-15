@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-jobs-587e0": {
+      "hosting": {
+        "ng-scalable": [
+          "ang-jobs"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-jobs-587e0"
+  }
+}

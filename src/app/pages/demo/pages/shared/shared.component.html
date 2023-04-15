@@ -1,0 +1,7 @@
+<app-button>Test Button</app-button>
+<app-button (click)="patchForm()">Patch Form</app-button>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-input formControlName="input" [placeholder]="'type me'"></app-input>
+</form>
+{{ form.value | json }}
