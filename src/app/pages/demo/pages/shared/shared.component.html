@@ -1,7 +1,16 @@
 <app-button>Test Button</app-button>
-<app-button (click)="patchForm()">Patch Form</app-button>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <app-input formControlName="input" [placeholder]="'type me'"></app-input>
+  <app-button (click)="patchForm()">Patch Form</app-button>
+  <app-button (click)="onToggleInline()">Toggle Inline</app-button>
+  <app-form-field
+    [label]="'Input'"
+    [required]="true"
+    [control]="form.controls['input']"
+    [isInline]="isInline"
+    [patternError]="regexErrors.email"
+  >
+    <app-input formControlName="input" [placeholder]="'type me'"></app-input>
+  </app-form-field>
 </form>
 {{ form.value | json }}
