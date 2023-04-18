@@ -12,5 +12,17 @@
   >
     <app-input formControlName="input" [placeholder]="'type me'"></app-input>
   </app-form-field>
+  <app-form-field
+    [label]="'Password'"
+    [required]="true"
+    [control]="form.controls['password']"
+    [isInline]="isInline"
+    [patternError]="regexErrors.password"
+  >
+    <app-password
+      formControlName="password"
+      [placeholder]="'Set passw'"
+    ></app-password>
+  </app-form-field>
 </form>
 {{ form.value | json }}

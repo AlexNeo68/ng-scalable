@@ -25,6 +25,7 @@ export class SharedComponent implements OnInit {
         ],
         ,
       ],
+      password: [null, [Validators.required, Validators.minLength(6)]],
     });
   }
 
