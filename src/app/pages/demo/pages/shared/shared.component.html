@@ -24,5 +24,17 @@
       [placeholder]="'Set passw'"
     ></app-password>
   </app-form-field>
+  <app-form-field
+    [label]="'Select'"
+    [required]="true"
+    [control]="form.controls['select']"
+    [isInline]="isInline"
+  >
+    <app-select
+      formControlName="select"
+      [placeholder]="'Select item'"
+      [items]="items"
+    ></app-select>
+  </app-form-field>
 </form>
 {{ form.value | json }}
