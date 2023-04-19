@@ -33,10 +33,10 @@ export class SharedComponent implements OnInit {
           Validators.minLength(3),
           Validators.pattern(regex.email),
         ],
-        ,
       ],
       password: [null, [Validators.required, Validators.minLength(6)]],
       select: [null, [Validators.required]],
+      checkboxes: [null, [Validators.required]],
     });
   }
 
