@@ -17,6 +17,26 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HeaderComponent } from './components/header/header.component';
 import { DemoModule } from 'app/pages/demo/demo.module';
 
+// Date
+import {
+  MatNativeDateModule,
+  MatDateFormats,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+
+const APP_DATE_FORMATS: MatDateFormats = {
+  parse: {
+    dateInput: { day: 'numeric', month: 'numeric', year: 'numeric' },
+  },
+  display: {
+    dateInput: { day: 'numeric', month: 'short', year: 'numeric' },
+    monthYearLabel: { year: 'numeric', month: 'short' },
+    dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'long' },
+  },
+};
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -33,8 +53,13 @@ import { DemoModule } from 'app/pages/demo/demo.module';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     DemoModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

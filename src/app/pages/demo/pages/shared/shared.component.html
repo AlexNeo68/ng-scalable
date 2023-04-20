@@ -44,5 +44,21 @@
   >
     <app-checkbox formControlName="checkboxes" [items]="items"></app-checkbox>
   </app-form-field>
+  <app-form-field
+    [label]="'Radios'"
+    [required]="true"
+    [control]="form.controls['radios']"
+    [isInline]="isInline"
+  >
+    <app-radio formControlName="radios" [items]="items"></app-radio>
+  </app-form-field>
+  <app-form-field
+    label="Date"
+    [required]="true"
+    [control]="form.controls['date']"
+    [isInline]="isInline"
+  >
+    <app-date formControlName="date" placeholder="Date"> </app-date>
+  </app-form-field>
 </form>
 {{ form.value | json }}

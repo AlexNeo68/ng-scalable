@@ -37,6 +37,14 @@ export class SharedComponent implements OnInit {
       password: [null, [Validators.required, Validators.minLength(6)]],
       select: [null, [Validators.required]],
       checkboxes: [null, [Validators.required]],
+      radios: [null, [Validators.required]],
+      date: [
+        null,
+        {
+          updateOn: 'change',
+          validators: [Validators.required],
+        },
+      ],
     });
   }
 
