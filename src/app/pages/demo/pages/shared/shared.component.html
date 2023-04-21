@@ -60,5 +60,17 @@
   >
     <app-date formControlName="date" placeholder="Date"> </app-date>
   </app-form-field>
+  <app-form-field
+    label="Date Range"
+    [required]="true"
+    [control]="form.controls['dateRange']"
+    [isInline]="isInline"
+  >
+    <app-date-range
+      formControlName="dateRange"
+      [placeholder]="{ from: 'От', to: 'До' }"
+    >
+    </app-date-range>
+  </app-form-field>
 </form>
 {{ form.value | json }}

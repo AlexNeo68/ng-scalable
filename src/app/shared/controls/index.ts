@@ -4,5 +4,6 @@ export * from './form-field/form-field.module';
 export * from './password/password.module';
 export * from './select/select.module';
 export * from './checkbox/checkbox.module';
-export * from './date/date.module';
 export * from './radio/radio.module';
+export * from './date/date.module';
+export * from './date-range/date-range.module';
