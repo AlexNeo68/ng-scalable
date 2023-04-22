@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ControlItem } from 'app/models/frontend';
-import { regex, regexErrors } from 'app/shared/utils';
+import { NotificationService } from 'app/services';
+import { markFormGroupTouched, regex, regexErrors } from 'app/shared/utils';
 
 @Component({
   selector: 'app-shared',
@@ -14,7 +15,12 @@ export class SharedComponent implements OnInit {
   regexErrors = regexErrors;
   items: ControlItem[];
 
-  constructor(private fb: FormBuilder) {
+  showSpinner: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private notificationService: NotificationService
+  ) {
     this.items = [
       { label: 'First', value: 1 },
       { label: 'Second', value: 2 },
@@ -31,7 +37,7 @@ export class SharedComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.pattern(regex.email),
+          Validators.pattern(regex.numbers),
         ],
       ],
       autocomplete: [
@@ -63,7 +69,19 @@ export class SharedComponent implements OnInit {
   }
 
   patchForm(): void {
-    this.form.patchValue({ input: 'inputPatched' });
+    this.form.patchValue({
+      input: 123,
+      password: 'qwerty',
+      autocomplete: 1,
+      select: 2,
+      checkboxes: [3],
+      radios: 4,
+      date: new Date().getTime(),
+      dateRange: {
+        from: new Date(2019, 5, 10).getTime(),
+        to: new Date(2019, 5, 25).getTime(),
+      },
+    });
   }
 
   onToggleInline(): void {
@@ -71,6 +89,27 @@ export class SharedComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Submit');
+    console.log('submit');
+    if (!this.form.valid) {
+      markFormGroupTouched(this.form);
+    }
+  }
+
+  onDisable(): void {
+    if (this.form.enabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
+  onToggleSpiner(): void {
+    this.showSpinner = !this.showSpinner;
+  }
+  onSuccess(): void {
+    this.notificationService.success('All right!');
+  }
+  onError(): void {
+    this.notificationService.error('Something went wrong!');
   }
 }
