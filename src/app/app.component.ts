@@ -10,6 +10,8 @@ import {
 } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { dictionariesReadAction } from 'app/store/dictionaries';
 
 interface Skill {
   name: string;
@@ -28,11 +30,12 @@ export class AppComponent implements OnInit {
 
   firestore: Firestore = inject(Firestore);
 
-  constructor() {
-    this.item$ = collectionData(collection(this.firestore, 'roles'));
+  constructor(private store: Store) {
+    // this.item$ = collectionData(collection(this.firestore, 'roles'));
   }
 
   ngOnInit(): void {
-    this.item$.subscribe((data) => console.log(data));
+    // this.item$.subscribe((data) => console.log(data));
+    this.store.dispatch(dictionariesReadAction());
   }
 }

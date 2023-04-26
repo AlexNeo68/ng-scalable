@@ -6,7 +6,7 @@ export interface Dictionaries {
   qualifications: Dictionary;
   specializations: Dictionary;
   roles: Dictionary;
-  //   countries: Dictionary;
+  countries: Dictionary;
 }
 
 export interface Dictionary {

@@ -26,6 +26,8 @@ import {
 } from '@angular/material/core';
 import { NotificationModule } from 'app/services';
 
+import { reducers, effects } from './store';
+
 const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
     dateInput: { day: 'numeric', month: 'numeric', year: 'numeric' },
@@ -50,8 +52,13 @@ const APP_DATE_FORMATS: MatDateFormats = {
     provideFirestore(() => getFirestore()),
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     DemoModule,
     MatNativeDateModule,

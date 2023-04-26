@@ -15,6 +15,7 @@ import {
   Dictionary,
   Item,
 } from 'app/store/dictionaries/dictionaries.models';
+import * as jsonCountries from 'assets/countries.json';
 
 const documentToItem = (x: any): Item => ({ ...x });
 const itemToControlItem = (x: Item): ControlItem => {
@@ -60,14 +61,25 @@ export class DictionariesEffect {
             map((items): Item[] => {
               return items.map((x) => documentToItem(x));
             })
+          ),
+          of(
+            (jsonCountries as any).default.map((country) => ({
+              id: country.code.toUpperCase(),
+              name: country.name,
+              icon: {
+                src: null,
+                cssClass: 'fflag fflag-' + country.code.toUpperCase(),
+              },
+            }))
           )
         ).pipe(
-          map(([skills, qualifications, specializations, roles]) => {
+          map(([skills, qualifications, specializations, roles, countries]) => {
             const dictionaries: Dictionaries = {
               skills: addDictionary(skills),
               qualifications: addDictionary(qualifications),
               specializations: addDictionary(specializations),
               roles: addDictionary(roles),
+              countries: addDictionary(countries),
             };
             return dictionariesReadSuccessAction({ dictionaries });
           }),
