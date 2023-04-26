@@ -8,6 +8,7 @@ import {
   collection,
   DocumentData,
 } from '@angular/fire/firestore';
+
 import { Observable } from 'rxjs';
 
 interface Skill {
@@ -24,11 +25,11 @@ export class AppComponent implements OnInit {
   production = environment.name;
 
   item$: Observable<any[]>;
+
   firestore: Firestore = inject(Firestore);
 
   constructor() {
-    const itemCollection = collection(this.firestore, 'skills');
-    this.item$ = collectionData(itemCollection);
+    this.item$ = collectionData(collection(this.firestore, 'roles'));
   }
 
   ngOnInit(): void {
